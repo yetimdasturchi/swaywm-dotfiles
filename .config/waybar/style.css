@@ -1,0 +1,207 @@
+/* -----------------------------------------------------------------------------
+ * Keyframes
+ * -------------------------------------------------------------------------- */
+
+@keyframes blink-warning {
+	70% {
+		color: @light;
+	}
+
+	to {
+		color: @light;
+		background-color: @warning;
+	}
+}
+
+@keyframes blink-critical {
+	70% {
+		color: @light;
+	}
+
+	to {
+		color: @light;
+		background-color: @critical;
+	}
+}
+
+
+/* -----------------------------------------------------------------------------
+ * Styles
+ * -------------------------------------------------------------------------- */
+
+
+/* COLORS */
+@define-color light #ebdbb2;
+@define-color dark #282828;
+@define-color warning #fabd2f;
+@define-color critical #cc241d;
+@define-color mode #a89984;
+@define-color workspaces #458588;
+@define-color workspacesfocused #83a598;
+@define-color sound #d3869b;
+@define-color network #b16286;
+@define-color memory #8ec07c;
+@define-color cpu #98971a;
+@define-color temp #b8bb26;
+@define-color layout #689d6a;
+@define-color battery #fabd2f;
+@define-color date #282828;
+@define-color time #ebdbb2;
+
+/* Reset all styles */
+* {
+	border: none;
+	border-radius: 0;
+	margin: 0;
+	padding: 0;
+}
+
+/* The whole bar */
+#waybar {
+	background: transparent;
+	font-family: "Iosevka Nerd Font";
+	font-size: 15px;
+	font-weight: bold;
+}
+
+/* Each module */
+#battery,
+#clock,
+#language,
+#network,
+#pulseaudio,
+#temperature,
+#backlight,
+#tray 
+{
+	padding-left: 12px;
+	padding-right: 12px;
+    background: @dark;
+	color: @light;
+}
+
+/* Each module that should blink */
+#mode,
+#memory,
+#temperature,
+#battery {
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+}
+
+#mode,
+#memory,
+#cpu,
+#custom-pkg,
+#idle_inhibitor
+{
+  	padding-left: 12px;
+	padding-right: 12px;
+    background: @cpu;
+	color: @dark;
+}
+
+/* Each critical module */
+#memory.critical,
+#cpu.critical,
+#temperature.critical,
+#battery.critical {
+	color: @critical;
+}
+
+/* Each critical that should blink */
+#mode,
+#memory.critical,
+#temperature.critical,
+#battery.critical.discharging {
+	animation-name: blink-critical;
+	animation-duration: 2s;
+}
+
+/* Each warning */
+#network.disconnected,
+#memory.warning,
+#cpu.warning,
+#temperature.warning,
+#battery.warning {
+	color: @warning;
+}
+
+/* Each warning that should blink */
+#battery.warning.discharging {
+	animation-name: blink-warning;
+	animation-duration: 3s;
+}
+
+/* And now modules themselves in their respective order */
+
+#mode { /* Shown current Sway mode (resize etc.) */
+	color: @light;
+	background: @mode;
+}
+
+/* Workspaces stuff */
+#workspaces button {
+	font-weight: bold;
+    color: @dark;
+    background: @workspaces;
+}
+
+#workspaces button.focused {
+	background: @workspacesfocused;
+	color: @dark;
+}
+
+#workspaces button.urgent {
+	border-color: @critical;
+	color: @critical;
+}
+
+#clock.date, 
+#clock.time
+{
+	background: @time;
+	color: @dark;
+}
+
+#pulseaudio.muted {
+    color: @battery;	
+}
+
+
+#custom-arrow_left3,
+#custom-arrow_right3
+{
+	color: @date;
+    font-size: 22px;
+	background: transparent;
+}
+
+#custom-arrow_left2,
+#custom-arrow_right2
+{
+	color: @time;
+    font-size: 22px;
+	background: transparent;
+}
+
+#custom-arrow_left1,
+#custom-arrow_right1
+{
+	color: @workspaces;
+    font-size: 22px;
+	background: transparent;
+}
+
+#custom-arrow_left4,
+#custom-arrow_right4
+{
+	color: @cpu;
+    font-size: 22px;
+	background: transparent;
+}
+
+#custom-arrow_left4 {
+    margin-left: 40px;
+}

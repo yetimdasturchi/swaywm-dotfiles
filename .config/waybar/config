@@ -1,0 +1,259 @@
+{
+	"layer": "top",
+	"position": "top",
+    "height": 18,
+    "margin": 10, 
+	"modules-left": [
+        "custom/arrow_left1",
+		"sway/workspaces",
+		"sway/mode",
+		"custom/arrow_right1",
+        "custom/arrow_left4",
+        "memory",
+        "cpu",
+        "custom/pkg",
+        "idle_inhibitor",
+        "custom/arrow_right4"
+	],
+
+	"modules-center": [
+        "custom/arrow_left2",
+		"clock#time",
+		"clock#date",
+        "custom/arrow_right2"
+	],
+
+	"modules-right": [
+        "custom/arrow_left3",
+        "network",
+        "pulseaudio",
+        "backlight",
+		"sway/language",
+		"battery",
+        "custom/arrow_right3",
+	],
+
+    "battery": {
+        "bat": "BAT0",
+        "adapter": "AC0",
+		"states": {
+            "good": 70,
+			"warning": 30,
+			"critical": 15
+		},
+		"format": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+		"format-discharging": "{icon} {capacity}%",
+        "format-icons": ["", "", "", "", ""],
+		"tooltip": false
+	},
+
+	"clock#time": {
+		"interval": 60,
+		"format": " {:%H:%M}",
+		"tooltip": false
+	},
+
+	"clock#date": {
+		"interval": 60,
+		"format": "{:%e %b %Y}", // Icon: calendar-alt
+		//"tooltip-format": "{:%e %B %Y}"
+		"tooltip": false
+	},
+
+	"cpu": {
+		"interval": 5,
+		"tooltip": false,
+		"format": " {usage}%", 
+		"states": {
+		  "warning": 70,
+		  "critical": 90
+		}
+	},
+
+	"sway/language": {
+		"format": " {}",
+		"min-length": 5,
+		"tooltip": false
+	},
+
+	"memory": {
+		"interval": 5,
+		"format": " {}%", // Icon: memory
+		"states": {
+			"warning": 70,
+			"critical": 90
+		}
+	},
+
+	"network": {
+        "interface": "wlo1",
+		"interval": 5,
+		"format-wifi": " {essid} ({signalStrength}%)", 
+		"format-ethernet": " {ifname}",
+		"format-disconnected": "睊 Disconnected",
+		"format-alt": "{ifname}: {ipaddr}",
+        "format-linked": " {ifname} (No IP)",
+		"tooltip": false,
+		"on-click-right": "/home/abdugani/.config/rofi/bin/network_menu"
+	},
+
+	"sway/mode": {
+		"format": "<span style=\"italic\"> {}</span>", // Icon: expand-arrows-alt
+		"tooltip": false
+	},
+
+	"sway/window": {
+		"format": "{}",
+		"max-length": 30,
+		"tooltip": false
+	},
+
+	"sway/workspaces": {
+		"all-outputs": true,
+		"disable-scroll": true,
+		"format": "{icon}",
+        "persistent_workspaces": {
+                   "1": [],
+                   "2": [],
+                   "3": [],
+                   "4": [],
+                   "5": [],
+                   "6": []
+        },
+        "format-icons": {
+			"urgent": "",
+			"focused": "",
+			"default": "",
+            "persistent": ""
+        }
+	},
+
+      "pulseaudio": {
+            "scroll-step": 2,
+            "format": " {icon} {volume}% {format_source}",
+            "format-bluetooth": "{volume}% {icon} {format_source}",
+            "format-bluetooth-muted": " {icon} {format_source}",
+            "format-muted": " muted",
+            "format-source": " {volume}%",
+            "format-source-muted": "",
+            "format-icons": {
+                "headphone": "",
+                "headset": "",
+                "phone": "",
+                "portable": "",
+                "car": "",
+                "default": ["", "", ""]
+            },
+            "on-click": "pamixer -t",
+            "on-click-right": "pavucontrol"
+        },
+
+	"temperature": {
+		"critical-threshold": 90,
+		"interval": 5,
+		//"format": "{icon} {temperatureC}°C",
+		"format": "{icon} {temperatureC}°",
+		"format-icons": [
+			"",
+			"",
+			"",
+			"", 
+			"" 
+		],
+		"tooltip": false
+	},
+
+	"tray": {
+		"icon-size": 21
+		//"spacing": 10
+	},
+
+    "mpd": {
+        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
+        "format-disconnected": "Disconnected ",
+        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
+        "unknown-tag": "N/A",
+        "interval": 2,
+        "consume-icons": {
+            "on": " "
+        },
+        "random-icons": {
+            "off": "<span color=\"#f53c3c\"></span> ",
+            "on": " "
+        },
+        "repeat-icons": {
+            "on": " "
+        },
+        "single-icons": {
+            "on": "1 "
+        },
+        "state-icons": {
+            "paused": "",
+            "playing": ""
+        },
+        "tooltip-format": "MPD (connected)",
+        "tooltip-format-disconnected": "MPD (disconnected)"
+    },
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "{icon}{percent}%",
+        "format-icons": [" ", " ", " "],
+        "on-scroll-up": "brightnessctl set +1%",
+        "on-scroll-down": "brightnessctl set 1%-"
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "零",
+            "deactivated": "鈴"
+        }
+    },
+   
+    "custom/pkg": {
+        "format": " {}",
+        "interval": 600,
+        "exec": "/home/abdugani/.config/waybar/scripts/pkg.sh"
+    },
+
+    "custom/arrow_left1": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/arrow_left2": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/arrow_left3": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/arrow_left4": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/arrow_right1": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/arrow_right2": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/arrow_right3": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/arrow_right4": {
+		"format": "",
+		"tooltip": false
+	}
+}
